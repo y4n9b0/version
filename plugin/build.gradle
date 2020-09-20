@@ -1,0 +1,93 @@
+plugins {
+    id 'kotlin'
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.3.72"
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+gradlePlugin {
+    plugins {
+        version {
+            // 在 app 模块需要通过 id 引用这个插件
+            id = 'com.step2hell.version'
+            // 实现这个插件的类的路径
+            implementationClass = 'com.step2hell.version.VersionPlugin'
+        }
+    }
+}
+
+group = 'com.step2hell.version'
+version = '1.0.0-SNAPSHOT'
+
+publishing {
+//    publications {
+//        mavenPub(MavenPublication) {
+//            from components.java
+//            pom {
+//                name.set("Version Plugin")
+//                description.set("A version plugin to control all the projects")
+//                licenses {
+//                    license {
+//                        name.set("The Apache License, Version 2.0")
+//                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+//                    }
+//                }
+//                developers {
+//                    developer {
+//                        id.set("1step2hell")
+//                        name.set("Bob")
+//                        email.set("step2hell@qq.com")
+//                    }
+//                }
+//                scm {
+//                    connection.set("scm:git:git://github.com/1step2hell/version.git")
+//                    developerConnection.set("scm:git:ssh://github.com/1step2hell/version.git")
+//                    url.set("https://github.com/1step2hell/version/")
+//                }
+//            }
+//        }
+//    }
+    repositories {
+        maven {
+            // 本地仓库
+//            url = mavenLocal()  // ${USER_HOME}/.m2/repository
+
+            // 远程仓库
+            if (version.toString().endsWith("SNAPSHOT")) {
+                url = "http://artifactory.jd.com/plugins-snapshots-local"
+            } else {
+                url = "http://artifactory.jd.com/plugins-releases-local"
+            }
+            credentials {
+                // 明文
+//                username '1step2hell'
+//                password 'hahaha'
+
+                // 环境变量
+//                username System.getenv('USER_NAME')
+//                password System.getenv('PASS_WORD')
+
+                // ~/.gradle/gradle.properties
+                // USER_NAME=1step2hell
+                // PASS_WORD=hahaha
+                username "${USER_NAME}"
+                password "${PASS_WORD}"
+            }
+        }
+    }
+}
