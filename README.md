@@ -39,5 +39,17 @@
     USER_NAME=1step2hell
     PASS_WORD=hahaha
     ```
-+ 插件发布不要升级插件版本，约定一直使用快照版本 `com.step2hell.version:plugin:1.0.0-SNAPSHOT`，避免大家在插件更新后还得去修改引用的插件版本号。
++ 插件发布请一定不要升级插件版本，我们约定一直使用快照版本 `jd.cdyjy.version:plugin:1.0.0-SNAPSHOT`，避免大家在插件更新后还得去修改引用的插件版本号。
+  如果组件工程出现缓存版本号一致而导致插件更新失败，请在组件工程的顶层 build.gradle 文件中配置如下缓存策略
+    ```
+    buildscript {
+        configurations.all {
+            resolutionStrategy {
+                cacheChangingModulesFor 1, 'minutes'
+                cacheDynamicVersionsFor 1, 'minutes'
+            }
+        }
+        ···
+    }
+    ```
 + 如果是发布到本地仓库 mavenLocal()，则替换发布指令为 `gradle clean :plugin:publishToMavenLocal`
