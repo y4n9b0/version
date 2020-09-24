@@ -31,10 +31,10 @@
 
 **如何修改插件中定义的版本号**
 + 拉取 version 工程最新的代码，在 VersionManager.kt 中修改你想要变更的版本号并提交。
-+ 本地运行 `gradle clean :plugin:publish` 命令发布插件（也可以在 Android Studio 右侧的 Gradle Tasks 里找到相应的 task：plugin -> Tasks -> publishing -> publish）
++ 本地运行 `gradle clean :plugin:publish` 命令发布插件（也可以在 Android Studio 右侧的 Gradle Tasks 里执行相应的 task：plugin -> Tasks -> publishing -> publish）
 
 **注意事项**
-+ 京东 maven 私服需要身份验证，所以在发布插件前请将自己的用户名和密码按照如下格式写入本地文件 ~/.gradle/gradle.properties
++ 京东 maven 私服需要身份验证，所以在发布插件前请将自己的用户名和密码按照如下格式写入本地文件 ${USER_HOME}/.gradle/gradle.properties
     ```
     USER_NAME=1step2hell
     PASS_WORD=hahaha
