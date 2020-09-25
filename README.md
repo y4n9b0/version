@@ -8,7 +8,7 @@
     buildscript {
         repositories {
             ···
-            maven { url "http://artifactory.jd.com/plugins-snapshots-local" }   // 如果是发布到本地仓库，则替换为 mavenLocal()
+            maven { url "http://artifactory.jd.com/plugins-snapshots-local" }
         }
         dependencies {
             ···
@@ -31,7 +31,7 @@
 
 **如何修改插件中定义的版本号**
 + 拉取 version 工程最新的代码，在 VersionManager.kt 中修改你想要变更的版本号并提交。
-+ 本地运行 `gradle clean :plugin:publish` 命令发布插件（也可以在 Android Studio 右侧的 Gradle Tasks 里执行相应的 task：plugin -> Tasks -> publishing -> publish）
++ 本地运行 `gradle clean :plugin:publish` 命令发布插件（也可以在 Android Studio 右侧的 Gradle Tasks 里执行相应的 task：version -> plugin -> Tasks -> publishing -> publish）
 
 **注意事项**
 + 京东 maven 私服需要身份验证，所以在发布插件前请将自己的用户名和密码按照如下格式写入本地文件 ${USER_HOME}/.gradle/gradle.properties
@@ -43,7 +43,7 @@
     * 以依赖的 artifactId 为基准，在保证不冲突且不产生歧义的情况下 尽量精简名字
     * 过滤掉不支持的中横线 -
     * 使用驼峰命名法
-+ 插件发布请一定不要升级插件版本，我们约定一直使用快照版本 `jd.cdyjy.version:plugin:1.0.0-SNAPSHOT`，避免大家在插件更新后还得去修改引用的插件版本号。
++ 插件发布请一定不要升级插件版本，我们约定一直使用快照版本 `com.step2hell.version:plugin:1.0.0-SNAPSHOT`，避免大家在插件更新后还得去修改引用的插件版本号。
   如果组件工程出现缓存版本号一致而导致插件更新失败，请在组件工程的顶层 build.gradle 文件中配置如下缓存策略
     ```
     buildscript {
@@ -56,4 +56,4 @@
         ···
     }
     ```
-+ 如果是发布到本地仓库 mavenLocal()，则替换发布指令为 `gradle clean :plugin:publishToMavenLocal`
++ 如果是发布到本地仓库 mavenLocal()，则替换发布指令为 `gradle clean :plugin:publishToMavenLocal`。当然，相应的发布 url 和依赖 repository 也需要替换为 mavenLocal()。
