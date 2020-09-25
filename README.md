@@ -57,3 +57,7 @@
     }
     ```
 + 如果是发布到本地仓库 mavenLocal()，则替换发布指令为 `gradle clean :plugin:publishToMavenLocal`。当然，相应的发布 url 和依赖 repository 也需要替换为 mavenLocal()。
++ 由于自身是 gradle 插件，所以该方式无法控制 module 工程的插件版本号。考虑到插件版本号的影响相对较小，是可以接受的。
+
+**Todo**
++ 目前暂不支持依赖自动补全，待后续？
