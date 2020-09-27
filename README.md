@@ -39,6 +39,8 @@
     USER_NAME=1step2hell
     PASS_WORD=hahaha
     ```
+  或者通过 gradle 命令 -P 参数传递 `gradle clean :plugin:publish -PUSER_NAME='1step2hell' -PPASS_WORD='hahaha'`。
+  需要注意的是，如果在文件中配置了账户密码，同时又在 gradle 参数中传递了账户密码，则以 gradle 命令中的为准（优先级最高）。
 + 新增依赖常量时，命名请尽量遵循以下规则：
     * 以依赖的 artifactId 为基准，在保证不冲突且不产生歧义的情况下 尽量精简名字
     * 过滤掉不支持的中横线 -

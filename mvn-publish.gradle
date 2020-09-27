@@ -56,7 +56,11 @@ publishing {
                 // username System.getenv('USER_NAME')
                 // password System.getenv('PASS_WORD')
 
-                // ~/.gradle/gradle.properties
+                /**
+                 * 配置在本地文件中 ~/.gradle/gradle.properties
+                 * or
+                 * 通过 gradle 命令 -P 参数传递: gradle clean :plugin:publish -PUSER_NAME='1step2hell' -PPASS_WORD='hahaha'
+                 */
                 username "${USER_NAME}"
                 password "${PASS_WORD}"
             }
