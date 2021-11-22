@@ -1,5 +1,3 @@
-package com.step2hell.version
-
 object Versions {
     val compileSdkVersion = 29
     val buildToolsVersion = "29.0.3"

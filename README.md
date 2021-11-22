@@ -16,13 +16,12 @@
         }
     }
     ```
-+ 在所有需要使用版本管理的 module 对应的 build.gradle 文件开头添加如下代码
++ [可选]在所有需要使用版本管理的 module 对应的 build.gradle 文件开头添加如下代码
     ```
-    import com.step2hell.version.*
-
-    ···
     apply plugin: 'com.step2hell.version'
     ```
+  apply version plugin 是为了让插件自定义的 plugin 生效，目前自定义插件的实现里仅仅打印了所有定义的 version 版本号，以方便查看。
+  不 apply version plugin 对版本号的使用没任何影响。
 + sync 成功后便可在 module 的 build.gradle 引用插件定义的相关版本依赖。引用的方式有如下两种，建议使用后一种（这里以 RecyclerView 为例）
     ```
     implementation "androidx.recyclerview:recyclerview:$Versions.recyclerView"

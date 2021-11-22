@@ -1,5 +1,7 @@
 package com.step2hell.version
 
+import Dependencies
+import Versions
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import kotlin.reflect.full.memberProperties
