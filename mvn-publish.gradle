@@ -1,5 +1,14 @@
+/**
+ * https://docs.gradle.org/current/userguide/publishing_maven.html
+ * https://developer.android.google.cn/studio/build/maven-publish-plugin
+ * https://github.com/jitpack/android-example/blob/master/library/build.gradle
+ */
 apply plugin: 'maven-publish'
 
+/*
+ * 可以在这里指定 group 和 version（但是无法指定 artifact）
+ * 这里指定的版本号针对所有的发布 task，如果 publications 具体发布任务中指定了版本号，执行相应 task 时 版本号以任务中指定的为准
+ */
 group = 'com.step2hell.version'
 version = '1.0.0-SNAPSHOT'
 
@@ -9,43 +18,47 @@ publishing {
      * 在不额外自定义 publication 的情况下，也可以直接使用 gradle :plugin:publish 来发布，该 task 会执行所有可能的发布 task。
      * 自定义额外的 publication 则必须单独使用相应的发布 task，使用 gradle :plugin:publish 会导致多个同类发布 task 产物相互覆盖。
      */
-//    publications {
-//        mavenPub(MavenPublication) {
-//            from components.java
-//            pom {
-//                name.set("Version Plugin")
-//                description.set("A version plugin to control all the projects")
-//                licenses {
-//                    license {
-//                        name.set("The Apache License, Version 2.0")
-//                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-//                    }
-//                }
-//                developers {
-//                    developer {
-//                        id.set("1step2hell")
-//                        name.set("Bob")
-//                        email.set("step2hell@qq.com")
-//                    }
-//                }
-//                scm {
-//                    connection.set("scm:git:git://github.com/1step2hell/version.git")
-//                    developerConnection.set("scm:git:ssh://github.com/1step2hell/version.git")
-//                    url.set("https://github.com/1step2hell/version/")
-//                }
-//            }
-//        }
-//    }
+    publications {
+        version(MavenPublication) {
+            groupId = 'com.step2hell.version'
+            artifactId = 'haha'
+            version = '2.0.0-SNAPSHOT'
+
+            from components.java
+            pom {
+                name.set("Version Plugin")
+                description.set("A version plugin to control all the projects")
+                licenses {
+                    license {
+                        name.set("The Apache License, Version 2.0")
+                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("1step2hell")
+                        name.set("Bob")
+                        email.set("step2hell@qq.com")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:git://github.com/1step2hell/version.git")
+                    developerConnection.set("scm:git:ssh://github.com/1step2hell/version.git")
+                    url.set("https://github.com/1step2hell/version/")
+                }
+            }
+        }
+    }
 
     repositories {
         maven {
             // 本地仓库
-            // url = mavenLocal()  // ${USER_HOME}/.m2/repository
+             url = mavenLocal()  // ${USER_HOME}/.m2/repository
 
-            // 远程仓库
-            url = version.toString().endsWith("SNAPSHOT")
-                    ? "http://artifactory.jd.com/plugins-snapshots-local"
-                    : "http://artifactory.jd.com/plugins-releases-local"
+//            // 远程仓库
+//            url = version.toString().endsWith("SNAPSHOT")
+//                    ? "http://artifactory.jd.com/plugins-snapshots-local"
+//                    : "http://artifactory.jd.com/plugins-releases-local"
 
 //            credentials {
 //                // 明文
